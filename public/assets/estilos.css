@@ -84,3 +84,6 @@ input:focus-visible, .boton:focus-visible, a:focus-visible { outline: 3px solid 
 footer { border-top: 1px solid var(--linea); padding: 32px 0 48px; font-size: 15px; color: var(--tinta-3); }
 footer .contenedor { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
 footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
+
+.descargas { list-style: none; padding: 0; }
+.descargas li { border-top: 1px solid var(--linea); padding: 16px 0; }

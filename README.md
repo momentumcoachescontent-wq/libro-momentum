@@ -12,6 +12,8 @@ Destino: `libro.momentumhub.cloud`, servido por el Worker de Cloudflare `libro-m
 | `/ticket/` | Golden ticket: correo + palabra clave impresa en el libro (no se indexa) |
 | `/ayuda/` | Dónde pedir ayuda. **Esta dirección se imprime en el libro: no cambiarla** |
 | `/recursos/` | Bibliografía, notas y prensa (por completar) |
+| `/descargas/` | Material para lectores (golden ticket). Protegido: solo con enlace firmado |
+| `/descargas/intro/` | La Introducción en PDF (registro de la Introducción). Protegido |
 | `/privacidad/` | Aviso de privacidad (**borrador con datos pendientes**) |
 | `POST /api/registro` | Recibe los formularios y los reenvía a n8n |
 
@@ -40,6 +42,12 @@ npx wrangler secret put TICKET_PALABRA      # la palabra impresa en el libro (si
 ```
 
 Sin `N8N_WEBHOOK_URL`, los formularios responden «El registro aún no está activo».
+
+## Descargas
+
+Al registrarse, el Worker firma un enlace (`/descargas/?t=…` o `/descargas/intro/?t=…`), lo devuelve al formulario (que redirige ahí) y lo manda a n8n en el campo `enlace` para el correo. Al abrir el enlace se guarda una cookie por un año. Sin enlace válido, `/descargas/*` redirige al formulario. La firma usa `DESCARGAS_SECRET` o, si no existe, `N8N_SHARED_SECRET`.
+
+Para agregar un archivo: ponerlo en `public/descargas/` (o `public/descargas/intro/`), enlazarlo en `tools/construir.py` y publicar.
 
 ## Flujo de n8n
 

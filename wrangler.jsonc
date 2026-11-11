@@ -7,7 +7,7 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": ["/api/*", "/descargas/*"]
   },
   "observability": { "enabled": true },
   // Valores públicos. Los secretos (webhook de n8n, palabra clave del ticket)

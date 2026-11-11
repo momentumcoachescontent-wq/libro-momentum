@@ -237,4 +237,36 @@ no_encontrada = """
 </div></div>
 """
 pagina("404.html", f"Página no encontrada · {TITULO}", "Página no encontrada.", no_encontrada, indexar=False)
+
+# ---------- Descargas (protegidas por el Worker) ----------
+desc_intro = """
+<div class="texto"><div class="estrecho">
+  <span class="fecha">Tu lectura gratuita</span>
+  <h1>La Introducción</h1>
+  <p class="entradilla">Gracias por registrarte. Aquí está la Introducción completa de <em>Ojalá hubiera sabido esto antes</em>, lista para leer o guardar.</p>
+  <p><a class="boton primario" href="/descargas/intro/introduccion.pdf" download>Descargar la Introducción (PDF)</a></p>
+  <p class="nota">Puedes volver a esta página desde el enlace que te llegó por correo.</p>
+  <h2>¿Quieres seguir?</h2>
+  <p>El libro completo sale el <span data-fecha>15 de diciembre de 2026</span>.</p>
+  <p><a class="boton" data-enlace="amazonUrl" data-pronto="En Amazon, muy pronto" href="#">Comprar en Amazon</a></p>
+</div></div>
+"""
+pagina("descargas/intro/index.html", f"Tu Introducción · {TITULO}", "Descarga de la Introducción.", desc_intro, indexar=False)
+
+desc_completo = """
+<div class="texto"><div class="estrecho">
+  <span class="fecha">Material para lectores</span>
+  <h1>Tus descargas</h1>
+  <p class="entradilla">Esto es lo que te guardé por llegar hasta el final del libro. Es gratis y es tuyo.</p>
+  <ul class="descargas">
+    <li><strong>La Introducción</strong> (PDF), para compartirla con alguien a quien le pueda servir.<br><a href="/descargas/intro/introduccion.pdf" download>Descargar</a></li>
+    <li><strong>Cuaderno «24 horas»</strong>: las herramientas de los once capítulos, con espacio para escribir.<br><span class="nota">Disponible el 15 de diciembre.</span></li>
+    <li><strong>«Cómo escribí este libro»</strong>: el texto que no entró en el libro.<br><span class="nota">Disponible el 15 de diciembre.</span></li>
+  </ul>
+  <p class="nota">Puedes volver a esta página desde el enlace que te llegó por correo. Si algo no abre, responde ese correo.</p>
+  <p class="nota">Si estás pasando por un momento difícil, aquí está <a href="/ayuda/">dónde pedir ayuda</a>.</p>
+</div></div>
+"""
+pagina("descargas/index.html", f"Tus descargas · {TITULO}", "Material para lectores del libro.", desc_completo, indexar=False)
+
 print("Páginas generadas en", RAIZ)

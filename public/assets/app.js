@@ -50,6 +50,15 @@
             form.reset();
             mensaje.className = "mensaje ok";
             mensaje.textContent = form.getAttribute("data-exito");
+            if (res.enlace) {
+              var a = document.createElement("a");
+              a.href = res.enlace;
+              a.className = "boton primario";
+              a.textContent = "Ir a mis descargas";
+              mensaje.appendChild(document.createElement("br"));
+              mensaje.appendChild(a);
+              setTimeout(function () { location.href = res.enlace; }, 2500);
+            }
           } else {
             mensaje.className = "mensaje error";
             mensaje.textContent = res.error || "Algo salió mal. Inténtalo de nuevo.";
