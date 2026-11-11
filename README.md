@@ -41,6 +41,12 @@ npx wrangler secret put TICKET_PALABRA      # la palabra impresa en el libro (si
 
 Sin `N8N_WEBHOOK_URL`, los formularios responden «El registro aún no está activo».
 
+## Flujo de n8n
+
+Flujo «Libro · Registro de lectores» (activo). URL de producción del webhook: `https://n8n-n8n.z3tydl.easypanel.host/webhook/libro-registro`. Guarda en la tabla de n8n `libro_lectores`. El correo al lector está desactivado hasta tener los enlaces de descarga.
+
+QR del golden ticket (provisional, apunta a workers.dev): `docs/qr/`. Regenerarlo cuando el dominio definitivo esté activo y antes de mandar el libro a imprenta.
+
 ## Contrato con n8n
 
 El Worker envía `POST` con encabezado `x-libro-secret` y este cuerpo:
