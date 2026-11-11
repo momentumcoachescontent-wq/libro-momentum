@@ -85,3 +85,7 @@ Pendiente. Con el DNS en Hostinger, la ruta es un subdominio: agregar en Cloudfl
 - [ ] Crear el flujo de n8n y la tabla de Supabase.
 - [ ] Cargar los tres secretos.
 - [ ] Probar los dos formularios de punta a punta.
+
+## Cuaderno «24 horas»
+
+Fuente en `tools/cuaderno/`. En esa carpeta: `npm i @fontsource/archivo@5.1.0 @fontsource/instrument-serif@5.1.0`, luego `python3 construir.py && node pdf.js` y unir `portada.pdf` + `cuerpo.pdf`. El PDF **no** se publica hasta el día que sale el libro: entonces se copia a `public/descargas/cuaderno-24-horas.pdf` y se enlaza en `tools/construir.py`.
