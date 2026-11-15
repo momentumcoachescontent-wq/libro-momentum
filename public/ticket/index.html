@@ -6,40 +6,49 @@
 <title>Una cosa más · Ojalá hubiera sabido esto antes</title>
 <meta name="description" content="Material adicional para lectores del libro.">
 <meta name="robots" content="noindex">
+<link rel="canonical" href="https://libro.momentumhub.cloud/ticket/">
+<meta property="og:type" content="book">
 <meta property="og:title" content="Una cosa más · Ojalá hubiera sabido esto antes">
 <meta property="og:description" content="Material adicional para lectores del libro.">
 <meta property="og:image" content="https://libro.momentumhub.cloud/img/elefante-toro.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#e7ece3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161d18" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/img/icono.png" type="image/png">
+<script>(function(){var g=null;try{g=localStorage.getItem('luz')}catch(e){}var h=new Date().getHours();var b=g?g==='baja':(matchMedia('(prefers-color-scheme: dark)').matches||h>=20||h<6);if(b)document.documentElement.setAttribute('data-luz','baja')})();</script>
+<link rel="preload" href="/assets/fuentes/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fuentes/literata.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/estilos.css">
 </head>
 <body>
-<header class="barra"><div class="contenedor">
+<a class="salto" href="#contenido">Ir al contenido</a>
+<header class="barra"><div class="ancho">
   <a class="marca" href="/">Ojalá hubiera sabido esto antes</a>
-  <nav aria-label="Principal"><a href="/introduccion/">Lee la Introducción</a><a href="/#edicion">Edición acompañada</a><a href="/ayuda/">Dónde pedir ayuda</a></nav>
+  <nav aria-label="Principal"><a href="/introduccion/">Leer la Introducción</a><a href="/ayuda/">Dónde pedir ayuda</a><button class="luz" type="button" data-luz-boton aria-pressed="false"><i aria-hidden="true"></i><span>Bajar la luz</span></button></nav>
 </div></header>
-<main>
+<main id="contenido">
 
-<div class="texto"><div class="estrecho">
-  <span class="fecha">Para quien llegó hasta el final</span>
+<div class="pagina"><div class="ancho"><div class="columna">
   <h1>Una cosa más</h1>
   <p class="entradilla">Si llegaste hasta aquí, te guardé algo que no cabe en el libro: las hojas de trabajo de las herramientas y un texto que no entró, «Cómo escribí este libro».</p>
   <p>Escribe tu correo y la palabra que te pido al final del libro. Te llega todo por correo.</p>
   <form data-origen="ticket" data-exito="Listo. Revisa tu correo: ahí están tus descargas." novalidate>
   <label>Tu nombre<input type="text" name="nombre" autocomplete="given-name" maxlength="120"></label>
   <label>Tu correo electrónico<input type="email" name="correo" required autocomplete="email" maxlength="254"></label>
-  <label>La palabra del libro<input type="text" name="palabra" required autocomplete="off" maxlength="60"><span class="nota">La encuentras en la página «Una cosa más», al final del libro.</span></label>
+  <label>La palabra del libro<input type="text" name="palabra" required autocomplete="off" maxlength="60"><span class="ayuda-campo">Está en la página «Una cosa más», al final del libro.</span></label>
   <div class="oculto" aria-hidden="true"><label>Sitio web<input type="text" name="sitio_web" tabindex="-1" autocomplete="off"></label></div>
   <label class="casilla"><input type="checkbox" name="consentimiento" required> <span>Acepto recibir correos de Ernesto Alvarez sobre el libro y he leído el <a href="/privacidad/">aviso de privacidad</a>. Puedo darme de baja cuando quiera.</span></label>
-  <div><button class="boton primario" type="submit">Quiero mi regalo</button></div>
+  <div><button class="boton" type="submit">Quiero mi regalo</button></div>
   <p class="mensaje" role="status" aria-live="polite"></p>
 </form>
-</div></div>
+</div></div></div>
 
 </main>
-<footer><div class="contenedor">
-  <p>© 2026 Ernesto Alvarez · Momentum Coaches</p>
+<footer class="pie"><div class="ancho">
+  <div>
+    <img class="elefante" src="/img/elefante.webp" alt="" width="587" height="412" loading="lazy">
+    <p>El toro embiste solo; el elefante se pinta entre dos.</p>
+    <p>© 2026 Ernesto Alvarez. Publicado con Momentum Coaches.</p>
+  </div>
   <nav aria-label="Pie"><a href="/ayuda/">Dónde pedir ayuda</a><a href="/recursos/">Recursos</a><a href="/privacidad/">Aviso de privacidad</a></nav>
 </div></footer>
 <script src="/assets/config.js"></script>
