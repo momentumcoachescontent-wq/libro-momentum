@@ -6,35 +6,44 @@
 <title>Tu Introducción · Ojalá hubiera sabido esto antes</title>
 <meta name="description" content="Descarga de la Introducción.">
 <meta name="robots" content="noindex">
+<link rel="canonical" href="https://libro.momentumhub.cloud/descargas/intro/">
+<meta property="og:type" content="book">
 <meta property="og:title" content="Tu Introducción · Ojalá hubiera sabido esto antes">
 <meta property="og:description" content="Descarga de la Introducción.">
 <meta property="og:image" content="https://libro.momentumhub.cloud/img/elefante-toro.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#e7ece3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161d18" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/img/icono.png" type="image/png">
+<script>(function(){var g=null;try{g=localStorage.getItem('luz')}catch(e){}var h=new Date().getHours();var b=g?g==='baja':(matchMedia('(prefers-color-scheme: dark)').matches||h>=20||h<6);if(b)document.documentElement.setAttribute('data-luz','baja')})();</script>
+<link rel="preload" href="/assets/fuentes/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fuentes/literata.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/estilos.css">
 </head>
 <body>
-<header class="barra"><div class="contenedor">
+<a class="salto" href="#contenido">Ir al contenido</a>
+<header class="barra"><div class="ancho">
   <a class="marca" href="/">Ojalá hubiera sabido esto antes</a>
-  <nav aria-label="Principal"><a href="/introduccion/">Lee la Introducción</a><a href="/#edicion">Edición acompañada</a><a href="/ayuda/">Dónde pedir ayuda</a></nav>
+  <nav aria-label="Principal"><a href="/introduccion/">Leer la Introducción</a><a href="/ayuda/">Dónde pedir ayuda</a><button class="luz" type="button" data-luz-boton aria-pressed="false"><i aria-hidden="true"></i><span>Bajar la luz</span></button></nav>
 </div></header>
-<main>
+<main id="contenido">
 
-<div class="texto"><div class="estrecho">
-  <span class="fecha">Tu lectura gratuita</span>
+<div class="pagina"><div class="ancho"><div class="columna">
   <h1>La Introducción</h1>
   <p class="entradilla">Gracias por registrarte. Aquí está la Introducción completa de <em>Ojalá hubiera sabido esto antes</em>, lista para leer o guardar.</p>
-  <p><a class="boton primario" href="/descargas/intro/introduccion.pdf" download>Descargar la Introducción (PDF)</a></p>
+  <p><a class="boton" href="/descargas/intro/introduccion.pdf" download>Descargar la Introducción (PDF)</a></p>
   <p class="nota">Puedes volver a esta página desde el enlace que te llegó por correo.</p>
   <h2>¿Quieres seguir?</h2>
   <p>El libro completo sale el <span data-fecha>15 de diciembre de 2026</span>.</p>
-  <p><a class="boton" data-enlace="amazonUrl" data-pronto="En Amazon, muy pronto" href="#">Comprar en Amazon</a></p>
-</div></div>
+  <p><a class="enlace" data-enlace="amazonUrl" data-pronto="En Amazon, muy pronto" href="#">Comprar en Amazon</a></p>
+</div></div></div>
 
 </main>
-<footer><div class="contenedor">
-  <p>© 2026 Ernesto Alvarez · Momentum Coaches</p>
+<footer class="pie"><div class="ancho">
+  <div>
+    <img class="elefante" src="/img/elefante.webp" alt="" width="587" height="412" loading="lazy">
+    <p>El toro embiste solo; el elefante se pinta entre dos.</p>
+    <p>© 2026 Ernesto Alvarez. Publicado con Momentum Coaches.</p>
+  </div>
   <nav aria-label="Pie"><a href="/ayuda/">Dónde pedir ayuda</a><a href="/recursos/">Recursos</a><a href="/privacidad/">Aviso de privacidad</a></nav>
 </div></footer>
 <script src="/assets/config.js"></script>

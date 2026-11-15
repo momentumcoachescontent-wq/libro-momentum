@@ -18,6 +18,23 @@
     if (cfg.fechaLanzamiento) el.textContent = cfg.fechaLanzamiento;
   });
 
+  // Luz: de día o luz baja. La elección se guarda en este navegador.
+  var raiz = document.documentElement;
+  document.querySelectorAll("[data-luz-boton]").forEach(function (b) {
+    function pinta() {
+      var baja = raiz.getAttribute("data-luz") === "baja";
+      b.setAttribute("aria-pressed", baja ? "true" : "false");
+      b.querySelector("span").textContent = baja ? "Subir la luz" : "Bajar la luz";
+    }
+    b.addEventListener("click", function () {
+      var baja = raiz.getAttribute("data-luz") !== "baja";
+      if (baja) raiz.setAttribute("data-luz", "baja"); else raiz.removeAttribute("data-luz");
+      try { localStorage.setItem("luz", baja ? "baja" : "dia"); } catch (e) {}
+      pinta();
+    });
+    pinta();
+  });
+
   // Formularios de registro.
   var params = new URLSearchParams(location.search);
   document.querySelectorAll("form[data-origen]").forEach(function (form) {
@@ -53,7 +70,7 @@
             if (res.enlace) {
               var a = document.createElement("a");
               a.href = res.enlace;
-              a.className = "boton primario";
+              a.className = "boton";
               a.textContent = "Ir a mis descargas";
               mensaje.appendChild(document.createElement("br"));
               mensaje.appendChild(a);

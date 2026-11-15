@@ -21,6 +21,14 @@ Destino: `libro.momentumhub.cloud`, servido por el Worker de Cloudflare `libro-m
 - `public/assets/config.js`: enlaces de Amazon y Hotmart, y la fecha de lanzamiento. Mientras estén vacíos, los botones dicen «Muy pronto».
 - `src/worker.js`: el Worker. Valida, filtra robots (campo trampa) y comprueba la palabra del ticket.
 
+## Diseño (noviembre de 2026)
+
+- **Dos luces.** De día (fondo niebla, verde del elefante, ónix del toro) y luz baja (`html[data-luz="baja"]`), con el resplandor de una lámpara. El sitio abre en luz baja si el lector la eligió antes, si su sistema está en modo oscuro o si son entre las 20:00 y las 6:00 en su reloj. El botón «Bajar la luz» guarda la elección en su navegador.
+- **Las dos figuras** están separadas (`img/elefante.webp`, `img/toro.webp`) y se apoyan en una repisa: el elefante grande, el toro más chico, como quedan al final del libro. `img/elefante-toro.png` se conserva para las vistas previas en redes.
+- **Tipografías propias** en `assets/fuentes/` (Bricolage Grotesque y Literata, licencia SIL OFL). El sitio no pide nada a terceros.
+- **El índice son las trece frases** «Ojalá hubiera sabido que…», una por capítulo.
+- Todo el color y la tipografía salen de las variables del inicio de `assets/estilos.css`. No uses mayúsculas sostenidas, tarjetas con sombra ni animaciones de entrada.
+
 ## Publicar
 
 Lo más simple es conectar el repo al Worker: Cloudflare → Workers → `libro-momentum` → Settings → Builds → Connect a GitHub repo. Cada push a `main` despliega.
