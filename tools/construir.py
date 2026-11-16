@@ -67,8 +67,8 @@ def pagina(ruta, titulo, descripcion, cuerpo, indexar=True, actual=""):
 
 def formulario(origen, exito, con_nombre=True, con_palabra=False, boton="Enviar"):
     nombre = '<label>Tu nombre<input type="text" name="nombre" autocomplete="given-name" maxlength="120"></label>' if con_nombre else ""
-    palabra = ('<label>La palabra del libro<input type="text" name="palabra" required autocomplete="off" maxlength="60">'
-               '<span class="ayuda-campo">Está en la página «Una cosa más», al final del libro.</span></label>') if con_palabra else ""
+    palabra = ('<label>Tu palabra<input type="text" name="palabra" required autocomplete="off" maxlength="60">'
+               '<span class="ayuda-campo">«Toro» o «elefante». Las dos están en la página «Una cosa más», al final del libro.</span></label>') if con_palabra else ""
     return f"""<form data-origen="{origen}" data-exito="{exito}" novalidate>
   {nombre}
   <label>Tu correo electrónico<input type="email" name="correo" required autocomplete="email" maxlength="254"></label>
@@ -166,8 +166,8 @@ inicio = f"""
     </div>
     <div>
       <h3>Si ya lo leíste</h3>
-      <p>Al final del libro hay una palabra. Con ella recibes el Cuaderno 24 horas y un texto que no entró, «Cómo escribí este libro».</p>
-      <p><a class="enlace" href="/ticket/">Tengo la palabra</a></p>
+      <p>Al final del libro hay dos palabras: toro y elefante. Con la que elijas recibes el Cuaderno «24 horas» o la Guía para leer acompañado, más un texto que no entró, «Cómo escribí este libro».</p>
+      <p><a class="enlace" href="/ticket/">Tengo mi palabra</a></p>
     </div>
   </div>
 </div></section>
@@ -205,8 +205,12 @@ pagina("introduccion/index.html", f"Lee la Introducción · {TITULO}",
 ticket = f"""
 <div class="pagina"><div class="ancho"><div class="columna">
   <h1>Una cosa más</h1>
-  <p class="entradilla">Si llegaste hasta aquí, te guardé algo que no cabe en el libro: las hojas de trabajo de las herramientas y un texto que no entró, «Cómo escribí este libro».</p>
-  <p>Escribe tu correo y la palabra que te pido al final del libro. Te llega todo por correo.</p>
+  <p class="entradilla">Si llegaste hasta aquí, te guardé algo que no cabe en el libro. Hay dos caminos, y los dos son figuras de mi librero.</p>
+  <ul class="descargas">
+    <li><strong>Toro</strong>, si tu primer impulso es resolver y seguir: el Cuaderno «24 horas», con las hojas de trabajo de cada capítulo.</li>
+    <li><strong>Elefante</strong>, si necesitas ir despacio y acompañado: la Guía para leer acompañado y «Cómo escribí este libro», el texto que no entró.</li>
+  </ul>
+  <p>Escribe tu correo y la palabra que elegiste. Te llega todo por correo.</p>
   {formulario("ticket", "Listo. Revisa tu correo: ahí están tus descargas.", con_palabra=True, boton="Quiero mi regalo")}
 </div></div></div>
 """
@@ -299,14 +303,42 @@ desc_intro = """
 """
 pagina("descargas/intro/index.html", f"Tu Introducción · {TITULO}", "Descarga de la Introducción.", desc_intro, indexar=False)
 
+
+def lista_toro():
+    return """<li><strong>Cuaderno «24 horas»</strong>: las herramientas de los once capítulos, con espacio para escribir.<br><span class="nota">Disponible el día que sale el libro.</span></li>"""
+def lista_elefante():
+    return """<li><strong>Guía para leer acompañado</strong>: preguntas por capítulo para leerlo despacio con otra persona o en grupo.<br><span class="nota">Disponible el día que sale el libro.</span></li>
+    <li><strong>«Cómo escribí este libro»</strong>: el texto que no entró en el libro.<br><span class="nota">Disponible el día que sale el libro.</span></li>"""
+def pagina_perfil(clave, titulo, entradilla, items, otro_ruta, otro_txt):
+    html = f"""
+<div class="pagina"><div class="ancho"><div class="columna">
+  <h1>{titulo}</h1>
+  <p class="entradilla">{entradilla}</p>
+  <ul class="descargas">
+    {items}
+    <li><strong>La Introducción</strong> (PDF), para compartirla con alguien a quien le pueda servir.<br><a href="/descargas/intro/introduccion.pdf" download>Descargar</a></li>
+  </ul>
+  <p class="nota">{otro_txt} <a href="{otro_ruta}">Verlo aquí</a>.</p>
+  <p class="nota">Puedes volver a esta página desde el enlace que te llegó por correo. Si algo no abre, responde ese correo.</p>
+  <p class="nota">Si estás pasando por un momento difícil, aquí está <a href="/ayuda/">dónde pedir ayuda</a>.</p>
+</div></div></div>
+"""
+    pagina(f"descargas/{clave}/index.html", f"{titulo} · {TITULO}", "Material para lectores del libro.", html, indexar=False)
+pagina_perfil("toro", "Tu camino: toro",
+  "Elegiste empezar por hacer. Esto es lo que te guardé, gratis y tuyo.", lista_toro(),
+  "/descargas/elefante/", "Si más adelante quieres el otro camino, el del elefante, también está.")
+pagina_perfil("elefante", "Tu camino: elefante",
+  "Elegiste ir despacio y acompañado. Esto es lo que te guardé, gratis y tuyo.", lista_elefante(),
+  "/descargas/toro/", "Si más adelante quieres el otro camino, el del toro, también está.")
+
 desc_completo = """
 <div class="pagina"><div class="ancho"><div class="columna">
   <h1>Tus descargas</h1>
   <p class="entradilla">Esto es lo que te guardé por llegar hasta el final del libro. Es gratis y es tuyo.</p>
   <ul class="descargas">
     <li><strong>La Introducción</strong> (PDF), para compartirla con alguien a quien le pueda servir.<br><a href="/descargas/intro/introduccion.pdf" download>Descargar</a></li>
-    <li><strong>Cuaderno «24 horas»</strong>: las herramientas de los once capítulos, con espacio para escribir.<br><span class="nota">Disponible el día que sale el libro.</span></li>
-    <li><strong>«Cómo escribí este libro»</strong>: el texto que no entró en el libro.<br><span class="nota">Disponible el día que sale el libro.</span></li>
+    <li><strong>Camino del toro:</strong> el Cuaderno «24 horas».<br><a href="/descargas/toro/">Abrir</a></li>
+    <li><strong>Camino del elefante:</strong> la Guía para leer acompañado y «Cómo escribí este libro».<br><a href="/descargas/elefante/">Abrir</a></li>
   </ul>
   <p class="nota">Puedes volver a esta página desde el enlace que te llegó por correo. Si algo no abre, responde ese correo.</p>
   <p class="nota">Si estás pasando por un momento difícil, aquí está <a href="/ayuda/">dónde pedir ayuda</a>.</p>

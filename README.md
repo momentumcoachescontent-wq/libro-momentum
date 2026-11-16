@@ -9,7 +9,8 @@ Destino: `libro.momentumhub.cloud`, servido por el Worker de Cloudflare `libro-m
 | --- | --- |
 | `/` | Página de ventas: portada, sinopsis, contenido, Edición acompañada, autor |
 | `/introduccion/` | La Introducción gratis a cambio del correo |
-| `/ticket/` | Golden ticket: correo + palabra clave impresa en el libro (no se indexa) |
+| `/ticket/` | Golden ticket: correo + una de las dos palabras impresas en el libro, «toro» o «elefante» (no se indexa) |
+| `/descargas/toro/`, `/descargas/elefante/` | Descargas por camino. Protegidas |
 | `/ayuda/` | Dónde pedir ayuda. **Esta dirección se imprime en el libro: no cambiarla** |
 | `/recursos/` | Bibliografía, notas y prensa (por completar) |
 | `/descargas/` | Material para lectores (golden ticket). Protegido: solo con enlace firmado |
@@ -19,7 +20,7 @@ Destino: `libro.momentumhub.cloud`, servido por el Worker de Cloudflare `libro-m
 
 - `public/`: archivos estáticos. Las páginas HTML se generan con `python3 tools/construir.py`; edita el script, no los HTML.
 - `public/assets/config.js`: enlaces de Amazon y Hotmart, y la fecha de lanzamiento. Mientras estén vacíos, los botones dicen «Muy pronto».
-- `src/worker.js`: el Worker. Valida, filtra robots (campo trampa) y comprueba la palabra del ticket.
+- `src/worker.js`: el Worker. Valida, filtra robots (campo trampa) y comprueba la palabra del ticket (toro o elefante, sin importar mayúsculas ni acentos); la palabra decide a qué página de descargas va el enlace y se manda a n8n como `perfil`.
 
 ## Diseño (noviembre de 2026)
 
@@ -46,7 +47,6 @@ Se cargan en Cloudflare, nunca en el repo:
 ```sh
 npx wrangler secret put N8N_WEBHOOK_URL     # URL del webhook de n8n
 npx wrangler secret put N8N_SHARED_SECRET   # texto que n8n valida en el encabezado x-libro-secret
-npx wrangler secret put TICKET_PALABRA      # la palabra impresa en el libro (sin importar mayúsculas ni acentos)
 ```
 
 Sin `N8N_WEBHOOK_URL`, los formularios responden «El registro aún no está activo».
@@ -72,6 +72,7 @@ El Worker envía `POST` con encabezado `x-libro-secret` y este cuerpo:
   "correo": "lector@ejemplo.com",
   "nombre": "Ana",
   "origen": "introduccion | ticket | ventas",
+  "perfil": "toro | elefante | null",
   "consentimiento": true,
   "utm_source": "youtube",
   "utm_medium": "video",

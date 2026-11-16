@@ -4,7 +4,6 @@
 // Secretos (Cloudflare → Workers → libro-momentum → Settings → Variables and Secrets):
 //   N8N_WEBHOOK_URL    URL del webhook de n8n que guarda en Supabase y envía el correo
 //   N8N_SHARED_SECRET  Texto compartido que n8n valida en el encabezado X-Libro-Secret
-//   TICKET_PALABRA     Palabra clave impresa en el libro para el golden ticket
 //   DESCARGAS_SECRET   (opcional) firma los enlaces de /descargas; si falta, usa N8N_SHARED_SECRET
 //
 // Zona de descargas: /descargas/ (todo) y /descargas/intro/ (solo la Introducción).
@@ -12,6 +11,10 @@
 // Al abrirlo se guarda una cookie por un año para volver sin el enlace.
 
 const ORIGENES = new Set(["introduccion", "ticket", "ventas"]);
+
+// Golden ticket: dos palabras impresas en el libro. No son secretas (están en la página «Una cosa más»);
+// cada una lleva a una página de descargas distinta y queda registrada como «perfil».
+const PALABRAS_TICKET = new Set(["toro", "elefante"]);
 
 export default {
   async fetch(request, env) {
@@ -58,12 +61,13 @@ async function registrar(request, env) {
     return json({ ok: false, error: "Necesitamos tu consentimiento para escribirte." }, 400);
   }
 
+  let perfil = null;
   if (origen === "ticket") {
-    const esperada = normalizar(env.TICKET_PALABRA || "");
     const recibida = normalizar(datos.palabra || "");
-    if (!esperada || recibida !== esperada) {
-      return json({ ok: false, error: "Esa no es la palabra. Búscala de nuevo en la página «Una cosa más», al final del libro." }, 400);
+    if (!PALABRAS_TICKET.has(recibida)) {
+      return json({ ok: false, error: "Esa no es una de las palabras. Búscalas de nuevo en la página «Una cosa más», al final del libro: son dos." }, 400);
     }
+    perfil = recibida;
   }
 
   if (!env.N8N_WEBHOOK_URL) {
@@ -72,13 +76,15 @@ async function registrar(request, env) {
 
   const nivel = origen === "ticket" ? "completo" : "intro";
   const token = await firmarToken(env, nivel);
-  const enlace = `${url_base(request)}/descargas/${nivel === "intro" ? "intro/" : ""}?t=${token}`;
+  const ruta = nivel === "intro" ? "intro/" : `${perfil}/`;
+  const enlace = `${url_base(request)}/descargas/${ruta}?t=${token}`;
 
   const registro = {
     enlace,
     correo,
     nombre,
     origen,
+    perfil,
     consentimiento,
     utm_source: String(datos.utm_source || "").slice(0, 80),
     utm_medium: String(datos.utm_medium || "").slice(0, 80),

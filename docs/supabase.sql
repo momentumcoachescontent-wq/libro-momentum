@@ -7,6 +7,7 @@ create table if not exists public.libro_lectores (
   correo         text not null,
   nombre         text,
   origen         text not null check (origen in ('introduccion', 'ticket', 'ventas')),
+  perfil         text check (perfil in ('toro', 'elefante')),  -- solo para origen = 'ticket'
   consentimiento boolean not null default false,
   utm_source     text,
   utm_medium     text,
